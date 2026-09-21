@@ -1,25 +1,36 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600&display=swap');
 
 :root {
-  --color-bg: #080f0e;
-  --color-bg-panel: #0c1614;
-  --color-bg-card: #0f1f1b;
-  --color-border: #1a2e28;
-  --color-accent: #1d9e75;
-  --color-accent-dim: #17785a;
-  --color-accent-glow: rgba(29, 158, 117, 0.18);
-  --color-accent-light: #9fe1cb;
-  --color-text-primary: #e2ede9;
+  --color-bg:            #080f0e;
+  --color-bg-panel:      #0c1614;
+  --color-bg-card:       #0f1f1b;
+  --color-bg-card-hover: #132620;
+  --color-border:        #1a2e28;
+  --color-border-soft:   #152520;
+
+  --color-accent:        #1D9E75;
+  --color-accent-dim:    #17785a;
+  --color-accent-glow:   rgba(29,158,117,0.18);
+  --color-accent-light:  #9FE1CB;
+
+  --color-text-primary:   #e2ede9;
   --color-text-secondary: #7da898;
-  --color-text-tertiary: #4a6e62;
-  --color-ok: #1d9e75;
-  --color-ok-bg: rgba(29, 158, 117, 0.12);
-  --color-warn: #fac775;
-  --color-danger: #f56565;
-  --font-ui: 'Space Grotesk', system-ui, sans-serif;
+  --color-text-tertiary:  #4a6e62;
+
+  --color-ok:      #1D9E75;
+  --color-ok-bg:   rgba(29,158,117,0.12);
+  --color-warn:    #FAC775;
+  --color-warn-bg: rgba(250,199,117,0.12);
+  --color-danger:  #f56565;
+
+  --font-ui:   'Space Grotesk', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
+
   --radius-sm: 4px;
   --radius-md: 8px;
+  --radius-lg: 12px;
+
+  --transition: 0.2s ease;
 }
 
 *,
@@ -32,8 +43,7 @@
 
 html,
 body {
-  min-width: 0;
-  min-height: 100%;
+  height: 100%;
   background: var(--color-bg);
   color: var(--color-text-primary);
   font-family: var(--font-ui);
@@ -42,42 +52,33 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-body {
-  overflow-x: hidden;
-}
+
+/* ─── DASHBOARD ─────────────────────────────────────────── */
 
 .dashboard {
-  width: 100%;
-  max-width: 1600px;
+  display: grid;
+  grid-template-rows: auto 1fr auto auto;
   min-height: 100vh;
+  max-width: 1440px;
   margin: 0 auto;
 }
 
-/* Header */
+
+/* ─── HEADER ─────────────────────────────────────────────── */
+
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
-  min-height: 64px;
   padding: 12px 20px;
-  background: var(--color-bg-panel);
   border-bottom: 1px solid var(--color-border);
-}
-
-.header-brand,
-.header-meta,
-.header-status,
-.overview-status,
-.status-bar,
-.status-items {
-  display: flex;
-  align-items: center;
+  background: var(--color-bg-panel);
 }
 
 .header-brand {
+  display: flex;
+  align-items: center;
   gap: 12px;
-  min-width: 0;
 }
 
 .header-logo {
@@ -87,48 +88,31 @@ body {
 }
 
 .header-title {
-  color: var(--color-accent-light);
   font-size: 18px;
   font-weight: 600;
+  color: var(--color-accent-light);
   letter-spacing: -0.3px;
 }
 
 .header-subtitle {
+  font-size: 11px;
   color: var(--color-text-tertiary);
   font-family: var(--font-mono);
-  font-size: 11px;
   letter-spacing: 0.3px;
 }
 
-.header-meta {
-  gap: 24px;
-  min-width: 0;
-}
-
-.vessel-id {
-  color: var(--color-text-tertiary);
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.6px;
-  white-space: nowrap;
-}
-
-.vessel-id span {
-  margin: 0 5px;
-  color: var(--color-border);
-}
-
 .header-status {
+  display: flex;
+  align-items: center;
   gap: 8px;
-  color: var(--color-text-secondary);
   font-family: var(--font-mono);
   font-size: 12px;
+  color: var(--color-text-secondary);
 }
 
 .live-dot {
   width: 7px;
   height: 7px;
-  flex: 0 0 auto;
   border-radius: 50%;
   background: var(--color-accent);
   box-shadow: 0 0 6px var(--color-accent);
@@ -136,92 +120,59 @@ body {
 }
 
 @keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-    box-shadow: 0 0 6px var(--color-accent);
-  }
-
-  50% {
-    opacity: 0.5;
-    box-shadow: 0 0 2px var(--color-accent);
-  }
+  0%, 100% { opacity: 1; box-shadow: 0 0 6px var(--color-accent); }
+  50%       { opacity: 0.5; box-shadow: 0 0 2px var(--color-accent); }
 }
 
-/* Conteúdo principal */
-.main-content {
-  min-width: 0;
-}
 
-.overview-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  padding: 14px 20px;
-  background: var(--color-bg-panel);
+/* ─── GRIDS ──────────────────────────────────────────────── */
+
+.mid-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   border-bottom: 1px solid var(--color-border);
 }
 
-.overview-status {
-  gap: 10px;
+.bottom-grid {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  border-bottom: 1px solid var(--color-border);
 }
 
-.status-indicator {
-  width: 9px;
-  height: 9px;
-  flex: 0 0 auto;
-  border-radius: 50%;
-  background: var(--color-ok);
-  box-shadow: 0 0 10px var(--color-accent);
+.mid-border {
+  border-top: 1px solid var(--color-border);
 }
 
-.eyebrow,
-.group-label {
-  color: var(--color-text-tertiary);
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
 
-.overview-title {
-  margin-top: 1px;
-  color: var(--color-accent-light);
-  font-family: var(--font-mono);
-  font-size: 14px;
-  font-weight: 600;
-}
+/* ─── PANEL ──────────────────────────────────────────────── */
 
-.update-info {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-  color: var(--color-text-tertiary);
-  font-family: var(--font-mono);
-  font-size: 9px;
-}
-
-.update-info strong {
-  color: var(--color-text-secondary);
-  font-weight: 500;
-}
-
-/* Painéis */
 .panel {
-  min-width: 0;
   padding: 16px 18px;
+  border-right: 1px solid var(--color-border);
+}
+
+.panel--no-border-right {
+  border-right: none;
 }
 
 .panel-title {
   display: flex;
   align-items: center;
   gap: 6px;
-  margin-bottom: 14px;
-  color: var(--color-text-secondary);
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.8px;
   text-transform: uppercase;
+  color: var(--color-text-secondary);
+  margin-bottom: 14px;
+}
+
+.panel-title--spaced {
+  margin-bottom: 8px;
+}
+
+.panel-title--inline {
+  margin-bottom: 0;
 }
 
 .panel-title i {
@@ -229,163 +180,134 @@ body {
   font-size: 14px;
 }
 
-.panel-caption {
-  margin-left: auto;
-  color: var(--color-text-tertiary);
-  font-family: var(--font-mono);
-  font-size: 9px;
-  font-weight: 400;
-  letter-spacing: 0;
-  text-transform: none;
-}
 
-/* Estabilidade e sensores */
-.dashboard-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-  border-bottom: 1px solid var(--color-border);
-}
-
-.stability-panel {
-  border-right: 1px solid var(--color-border);
-}
-
-.stability-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1.5fr) minmax(190px, 0.7fr);
-  align-items: center;
-  gap: 12px;
-}
-
-.vessel-wrap {
-  min-width: 0;
-}
+/* ─── VESSEL SVG ─────────────────────────────────────────── */
 
 .vessel-svg {
-  display: block;
   width: 100%;
   height: auto;
-  max-height: 300px;
+  display: block;
   color: var(--color-text-primary);
 }
 
 @keyframes waveMove {
-  from {
-    transform: translateX(0);
-  }
-
-  to {
-    transform: translateX(-80px);
-  }
+  from { transform: translateX(0); }
+  to   { transform: translateX(-80px); }
 }
 
 .wave-anim {
   animation: waveMove 4s linear infinite;
 }
 
-.stability-metrics {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 8px;
+
+/* ─── STABILITY CARDS ────────────────────────────────────── */
+
+.stability-cards {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
 }
 
-.metric-card {
-  padding: 11px 12px;
+.stab-card {
+  flex: 1;
   background: var(--color-bg-card);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
+  padding: 10px 12px;
+  text-align: center;
 }
 
-.metric-card span,
-.sensor-head > span {
-  color: var(--color-text-tertiary);
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 1px;
-}
-
-.metric-card span {
-  display: block;
-}
-
-.metric-card strong {
-  display: block;
-  margin: 3px 0 2px;
-  color: var(--color-text-primary);
-  font-family: var(--font-mono);
-  font-size: 21px;
-  line-height: 1.1;
-}
-
-.metric-card small {
-  color: var(--color-ok);
+.stab-card .label {
   font-size: 9px;
   font-weight: 600;
-  letter-spacing: 0.7px;
+  letter-spacing: 1px;
   text-transform: uppercase;
+  color: var(--color-text-tertiary);
+  margin-bottom: 4px;
 }
 
-.metric-card--wide strong {
-  color: var(--color-accent-light);
+.stab-card .value {
+  font-family: var(--font-mono);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  line-height: 1.1;
+  margin-bottom: 4px;
 }
 
-.sensors-panel {
-  border-right: 0;
+.status-ok {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--color-ok);
 }
+
+
+/* ─── DRAFT GRID ─────────────────────────────────────────── */
 
 .draft-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr 1fr;
   gap: 10px;
+  margin-bottom: 16px;
 }
 
 .draft-card {
-  min-width: 0;
-  padding: 10px 12px;
   background: var(--color-bg-card);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
+  padding: 10px 12px;
 }
 
-.sensor-head {
+.draft-card .row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
-  margin-bottom: 5px;
+  margin-bottom: 6px;
 }
 
-.sensor-head b {
-  padding: 1px 5px;
+.sensor-name {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+}
+
+.badge-ok {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
   color: var(--color-ok);
   background: var(--color-ok-bg);
-  border: 1px solid rgba(29, 158, 117, 0.25);
+  border: 1px solid rgba(29,158,117,0.25);
   border-radius: var(--radius-sm);
-  font-size: 8px;
-  letter-spacing: 0.7px;
+  padding: 1px 5px;
 }
 
 .draft-value {
-  margin-bottom: 8px;
-  color: var(--color-text-primary);
   font-family: var(--font-mono);
-  font-size: 23px;
+  font-size: 22px;
   font-weight: 600;
+  color: var(--color-text-primary);
   line-height: 1.1;
+  margin-bottom: 8px;
 }
 
 .draft-value span {
-  margin-left: 2px;
-  color: var(--color-text-tertiary);
   font-size: 12px;
+  color: var(--color-text-tertiary);
+  margin-left: 2px;
 }
 
 .bar-track {
   height: 4px;
-  margin-bottom: 6px;
-  overflow: hidden;
   background: var(--color-border);
   border-radius: 2px;
+  margin-bottom: 6px;
+  overflow: hidden;
 }
 
 .bar-fill {
@@ -396,89 +318,227 @@ body {
 }
 
 .pressure-label {
+  font-size: 10px;
   color: var(--color-text-tertiary);
   font-family: var(--font-mono);
-  font-size: 10px;
 }
 
 .pressure-label span {
   color: var(--color-text-secondary);
 }
 
-/* IMU */
-.imu-panel {
-  border-bottom: 1px solid var(--color-border);
-}
 
-.imu-groups {
-  display: grid;
-  grid-template-columns: 1fr 1fr 170px;
-  gap: 10px;
-}
-
-.imu-group,
-.imu-temp {
-  min-width: 0;
-  padding: 10px;
-  background: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-}
+/* ─── IMU GRID ───────────────────────────────────────────── */
 
 .imu-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 8px;
-  margin-top: 7px;
 }
 
 .imu-card {
-  padding: 7px 6px;
-  text-align: center;
-  background: var(--color-bg);
+  background: var(--color-bg-card);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
+  padding: 8px 10px;
+  text-align: center;
 }
 
-.imu-card span {
-  display: block;
-  margin-bottom: 2px;
+.imu-card .label {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
   color: var(--color-text-tertiary);
-  font-size: 8px;
+  margin-bottom: 4px;
 }
 
-.imu-card strong {
-  color: var(--color-accent-light);
+.imu-card .value {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 500;
-  white-space: nowrap;
+  color: var(--color-accent-light);
 }
 
-.imu-temp {
+
+/* ─── CAM PANEL ──────────────────────────────────────────── */
+
+.cam-panel {
+  padding: 16px 18px;
+  border-right: 1px solid var(--color-border);
+}
+
+.cam-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.cam-conf-label {
+  font-size: 10px;
+  color: var(--color-text-tertiary);
+  font-family: var(--font-mono);
+}
+
+.equip-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 8px;
+}
+
+
+/* ─── PEOPLE PANEL ───────────────────────────────────────── */
+
+.people-panel {
+  padding: 16px 18px;
   display: flex;
   flex-direction: column;
+  gap: 10px;
+}
+
+.people-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 0;
+}
+
+.people-circle {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  border: 2px solid var(--color-accent);
+  background: var(--color-accent-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 6px;
+}
+
+.people-circle .count {
+  font-family: var(--font-mono);
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--color-accent-light);
+  line-height: 1;
+}
+
+.people-badge {
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  display: flex;
+  align-items: center;
   justify-content: center;
 }
 
-.imu-temp strong {
-  margin-top: 6px;
-  color: var(--color-accent-light);
-  font-family: var(--font-mono);
-  font-size: 22px;
+.people-badge i {
+  font-size: 11px;
+  color: #fff;
 }
 
-/* Rodapé */
-.status-bar {
+.people-center .sub {
+  font-size: 11px;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+.people-center .cap {
+  font-size: 10px;
+  color: var(--color-text-tertiary);
+  font-family: var(--font-mono);
+}
+
+.cap-bar {
+  height: 5px;
+  background: var(--color-border);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.cap-fill {
+  height: 100%;
+  width: 50%;
+  background: linear-gradient(90deg, var(--color-accent-dim), var(--color-accent));
+  border-radius: 3px;
+}
+
+.cap-percent {
+  font-size: 10px;
+  color: var(--color-text-tertiary);
+  text-align: center;
+  font-family: var(--font-mono);
+}
+
+.dist-section {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dist-title {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+  margin-bottom: 2px;
+}
+
+.dist-row {
+  display: flex;
   justify-content: space-between;
-  gap: 16px;
+  align-items: center;
+  font-size: 11px;
+  color: var(--color-text-secondary);
+  padding: 3px 0;
+  border-bottom: 1px solid var(--color-border-soft);
+}
+
+.dist-row .num {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.warning-tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  color: var(--color-warn);
+  background: var(--color-warn-bg);
+  border: 1px solid rgba(250,199,117,0.2);
+  border-radius: var(--radius-sm);
+  padding: 5px 8px;
+}
+
+.warning-tag i {
+  font-size: 12px;
+}
+
+
+/* ─── STATUS BAR ─────────────────────────────────────────── */
+
+.status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding: 8px 20px;
   background: var(--color-bg-panel);
   border-top: 1px solid var(--color-border);
 }
 
 .status-items {
-  flex-wrap: wrap;
+  display: flex;
+  align-items: center;
   gap: 20px;
 }
 
@@ -486,8 +546,8 @@ body {
   display: flex;
   align-items: center;
   gap: 5px;
-  font-family: var(--font-mono);
   font-size: 11px;
+  font-family: var(--font-mono);
 }
 
 .status-item i {
@@ -503,9 +563,9 @@ body {
 }
 
 .status-vessel {
+  font-size: 11px;
   color: var(--color-text-tertiary);
   font-family: var(--font-mono);
-  font-size: 11px;
 }
 
 .status-vessel strong {
@@ -513,43 +573,71 @@ body {
   font-weight: 600;
 }
 
-/* Responsividade */
-@media (max-width: 1000px) {
-  .dashboard-grid {
+/* =========================================================
+   RESPONSIVIDADE - AJUSTES EXCLUSIVOS DE INTERFACE
+   Mantem a estrutura, dados, estilos e funcionalidades
+   existentes. Apenas adapta a disposicao para telas menores.
+   ========================================================= */
+
+/* Tablets e telas menores */
+@media (max-width: 900px) {
+  .dashboard {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .header {
+    padding: 12px 16px;
+  }
+
+  .mid-grid,
+  .bottom-grid {
     grid-template-columns: 1fr;
   }
 
-  .stability-panel {
-    border-right: 0;
-    border-bottom: 1px solid var(--color-border);
+  .panel,
+  .cam-panel,
+  .people-panel {
+    border-right: none;
   }
 
-  .sensors-panel {
-    border-right: 0;
-  }
-
-  .imu-groups {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .imu-temp {
-    min-height: 90px;
+  .status-bar {
+    gap: 12px;
+    flex-wrap: wrap;
   }
 }
 
-@media (max-width: 700px) {
-  .header {
-    padding: 11px 14px;
+/* Celulares */
+@media (max-width: 600px) {
+  html,
+  body {
+    width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+    font-size: 12px;
   }
 
-  .header-meta {
-    flex-direction: column;
-    align-items: flex-end;
+  .dashboard {
+    display: block;
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .header {
+    width: 100%;
+    padding: 10px 12px;
+    gap: 10px;
+  }
+
+  .header-brand {
+    min-width: 0;
     gap: 8px;
   }
 
-  .vessel-id {
-    display: none;
+  .header-logo {
+    width: 30px;
+    height: 30px;
   }
 
   .header-title {
@@ -557,95 +645,99 @@ body {
   }
 
   .header-subtitle {
-    font-size: 8px;
+    max-width: 190px;
+    font-size: 9px;
+    line-height: 1.25;
   }
 
   .header-status {
-    font-size: 10px;
+    flex-shrink: 0;
+    gap: 5px;
+    font-size: 9px;
   }
 
-  .overview-bar {
-    align-items: flex-start;
-    padding: 12px 14px;
+  .live-dot {
+    width: 6px;
+    height: 6px;
   }
 
-  .update-info {
-    flex-direction: column;
-    gap: 1px;
-    text-align: right;
-  }
-
-  .stability-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .vessel-svg {
-    max-height: none;
-  }
-
-  .stability-metrics {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .metric-card {
-    padding: 9px;
-  }
-
-  .metric-card strong {
-    font-size: 18px;
-  }
-
-  .imu-groups {
-    grid-template-columns: 1fr;
-  }
-
-  .imu-temp {
-    min-height: auto;
-  }
-
-  .status-bar {
-    align-items: flex-start;
-    flex-direction: column;
-    padding: 10px 14px;
-  }
-
-  .status-vessel {
+  .mid-grid,
+  .bottom-grid {
+    display: block;
     width: 100%;
   }
-}
 
-@media (max-width: 480px) {
-  body {
-    font-size: 12px;
-  }
-
-  .panel {
-    padding: 13px 12px;
+  .panel,
+  .cam-panel,
+  .people-panel {
+    width: 100%;
+    padding: 12px;
+    border-right: none;
   }
 
   .panel-title {
+    font-size: 9px;
+    letter-spacing: 0.65px;
     margin-bottom: 10px;
-    font-size: 10px;
   }
 
-  .overview-bar {
-    gap: 10px;
-  }
-
-  .overview-title {
+  .panel-title i {
     font-size: 12px;
   }
 
+  .vessel-svg {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .stability-cards {
+    gap: 6px;
+    margin-top: 8px;
+  }
+
+  .stab-card {
+    min-width: 0;
+    padding: 8px 6px;
+  }
+
+  .stab-card .label {
+    font-size: 7px;
+    letter-spacing: 0.7px;
+  }
+
+  .stab-card .value {
+    font-size: 17px;
+  }
+
+  .status-ok {
+    font-size: 7px;
+  }
+
   .draft-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 7px;
+    margin-bottom: 12px;
   }
 
   .draft-card {
-    padding: 9px;
+    min-width: 0;
+    padding: 8px 9px;
+  }
+
+  .sensor-name {
+    font-size: 7px;
+    letter-spacing: 0.7px;
+  }
+
+  .badge-ok {
+    font-size: 7px;
+    padding: 1px 4px;
   }
 
   .draft-value {
-    font-size: 19px;
+    font-size: 18px;
+    margin-bottom: 6px;
   }
 
   .draft-value span {
@@ -653,87 +745,105 @@ body {
   }
 
   .pressure-label {
-    font-size: 9px;
+    font-size: 8px;
+    white-space: nowrap;
   }
 
-  .stability-metrics {
+  .imu-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 6px;
   }
 
-  .metric-card {
-    padding: 8px 6px;
-    text-align: center;
+  .imu-card {
+    min-width: 0;
+    padding: 7px 6px;
   }
 
-  .metric-card span {
-    font-size: 8px;
-  }
-
-  .metric-card strong {
-    font-size: 16px;
-  }
-
-  .metric-card small {
+  .imu-card .label {
     font-size: 7px;
-    letter-spacing: 0.4px;
+    letter-spacing: 0.55px;
   }
 
-  .imu-card strong {
+  .imu-card .value {
     font-size: 11px;
+    white-space: nowrap;
+  }
+
+  .equip-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .people-panel {
+    gap: 8px;
+  }
+
+  .status-bar {
+    width: 100%;
+    padding: 8px 12px;
+    gap: 8px;
+    align-items: flex-start;
   }
 
   .status-items {
-    gap: 9px 14px;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 6px 12px;
   }
 
-  .status-item {
-    font-size: 9px;
+  .status-item,
+  .status-vessel {
+    font-size: 8px;
+  }
+
+  .status-vessel {
+    width: 100%;
   }
 }
 
-@media (max-width: 360px) {
+/* Celulares estreitos */
+@media (max-width: 380px) {
+  .header {
+    align-items: flex-start;
+  }
+
+  .header-brand {
+    flex: 1;
+  }
+
   .header-subtitle {
     max-width: 145px;
-    line-height: 1.15;
   }
 
-  .stability-metrics {
-    grid-template-columns: 1fr;
+  .header-status {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+    font-size: 8px;
   }
 
-  .metric-card {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: center;
-    gap: 3px 8px;
-    text-align: left;
-  }
-
-  .metric-card span {
-    grid-column: 1;
-  }
-
-  .metric-card strong {
-    grid-column: 2;
-    grid-row: 1 / span 2;
-  }
-
-  .metric-card small {
-    grid-column: 1;
+  .panel,
+  .cam-panel,
+  .people-panel {
+    padding: 10px;
   }
 
   .draft-grid {
-    grid-template-columns: 1fr;
+    gap: 6px;
   }
-}
 
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    scroll-behavior: auto !important;
-    transition-duration: 0.01ms !important;
+  .draft-card {
+    padding: 7px;
+  }
+
+  .draft-value {
+    font-size: 16px;
+  }
+
+  .pressure-label {
+    font-size: 7px;
+  }
+
+  .imu-card .value {
+    font-size: 10px;
   }
 }
