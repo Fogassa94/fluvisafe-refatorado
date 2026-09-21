@@ -1,0 +1,739 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600&display=swap');
+
+:root {
+  --color-bg: #080f0e;
+  --color-bg-panel: #0c1614;
+  --color-bg-card: #0f1f1b;
+  --color-border: #1a2e28;
+  --color-accent: #1d9e75;
+  --color-accent-dim: #17785a;
+  --color-accent-glow: rgba(29, 158, 117, 0.18);
+  --color-accent-light: #9fe1cb;
+  --color-text-primary: #e2ede9;
+  --color-text-secondary: #7da898;
+  --color-text-tertiary: #4a6e62;
+  --color-ok: #1d9e75;
+  --color-ok-bg: rgba(29, 158, 117, 0.12);
+  --color-warn: #fac775;
+  --color-danger: #f56565;
+  --font-ui: 'Space Grotesk', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  min-width: 0;
+  min-height: 100%;
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-ui);
+  font-size: 13px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.dashboard {
+  width: 100%;
+  max-width: 1600px;
+  min-height: 100vh;
+  margin: 0 auto;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  min-height: 64px;
+  padding: 12px 20px;
+  background: var(--color-bg-panel);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.header-brand,
+.header-meta,
+.header-status,
+.overview-status,
+.status-bar,
+.status-items {
+  display: flex;
+  align-items: center;
+}
+
+.header-brand {
+  gap: 12px;
+  min-width: 0;
+}
+
+.header-logo {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+}
+
+.header-title {
+  color: var(--color-accent-light);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+}
+
+.header-subtitle {
+  color: var(--color-text-tertiary);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.3px;
+}
+
+.header-meta {
+  gap: 24px;
+  min-width: 0;
+}
+
+.vessel-id {
+  color: var(--color-text-tertiary);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.6px;
+  white-space: nowrap;
+}
+
+.vessel-id span {
+  margin: 0 5px;
+  color: var(--color-border);
+}
+
+.header-status {
+  gap: 8px;
+  color: var(--color-text-secondary);
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.live-dot {
+  width: 7px;
+  height: 7px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--color-accent);
+  box-shadow: 0 0 6px var(--color-accent);
+  animation: pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 6px var(--color-accent);
+  }
+
+  50% {
+    opacity: 0.5;
+    box-shadow: 0 0 2px var(--color-accent);
+  }
+}
+
+/* Conteúdo principal */
+.main-content {
+  min-width: 0;
+}
+
+.overview-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 14px 20px;
+  background: var(--color-bg-panel);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.overview-status {
+  gap: 10px;
+}
+
+.status-indicator {
+  width: 9px;
+  height: 9px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--color-ok);
+  box-shadow: 0 0 10px var(--color-accent);
+}
+
+.eyebrow,
+.group-label {
+  color: var(--color-text-tertiary);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.overview-title {
+  margin-top: 1px;
+  color: var(--color-accent-light);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.update-info {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  color: var(--color-text-tertiary);
+  font-family: var(--font-mono);
+  font-size: 9px;
+}
+
+.update-info strong {
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+/* Painéis */
+.panel {
+  min-width: 0;
+  padding: 16px 18px;
+}
+
+.panel-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 14px;
+  color: var(--color-text-secondary);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.panel-title i {
+  color: var(--color-accent);
+  font-size: 14px;
+}
+
+.panel-caption {
+  margin-left: auto;
+  color: var(--color-text-tertiary);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* Estabilidade e sensores */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.stability-panel {
+  border-right: 1px solid var(--color-border);
+}
+
+.stability-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(190px, 0.7fr);
+  align-items: center;
+  gap: 12px;
+}
+
+.vessel-wrap {
+  min-width: 0;
+}
+
+.vessel-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  color: var(--color-text-primary);
+}
+
+@keyframes waveMove {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-80px);
+  }
+}
+
+.wave-anim {
+  animation: waveMove 4s linear infinite;
+}
+
+.stability-metrics {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.metric-card {
+  padding: 11px 12px;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.metric-card span,
+.sensor-head > span {
+  color: var(--color-text-tertiary);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.metric-card span {
+  display: block;
+}
+
+.metric-card strong {
+  display: block;
+  margin: 3px 0 2px;
+  color: var(--color-text-primary);
+  font-family: var(--font-mono);
+  font-size: 21px;
+  line-height: 1.1;
+}
+
+.metric-card small {
+  color: var(--color-ok);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+}
+
+.metric-card--wide strong {
+  color: var(--color-accent-light);
+}
+
+.sensors-panel {
+  border-right: 0;
+}
+
+.draft-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.draft-card {
+  min-width: 0;
+  padding: 10px 12px;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.sensor-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 5px;
+}
+
+.sensor-head b {
+  padding: 1px 5px;
+  color: var(--color-ok);
+  background: var(--color-ok-bg);
+  border: 1px solid rgba(29, 158, 117, 0.25);
+  border-radius: var(--radius-sm);
+  font-size: 8px;
+  letter-spacing: 0.7px;
+}
+
+.draft-value {
+  margin-bottom: 8px;
+  color: var(--color-text-primary);
+  font-family: var(--font-mono);
+  font-size: 23px;
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.draft-value span {
+  margin-left: 2px;
+  color: var(--color-text-tertiary);
+  font-size: 12px;
+}
+
+.bar-track {
+  height: 4px;
+  margin-bottom: 6px;
+  overflow: hidden;
+  background: var(--color-border);
+  border-radius: 2px;
+}
+
+.bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-accent-dim), var(--color-accent));
+  border-radius: 2px;
+  transition: width 0.6s ease;
+}
+
+.pressure-label {
+  color: var(--color-text-tertiary);
+  font-family: var(--font-mono);
+  font-size: 10px;
+}
+
+.pressure-label span {
+  color: var(--color-text-secondary);
+}
+
+/* IMU */
+.imu-panel {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.imu-groups {
+  display: grid;
+  grid-template-columns: 1fr 1fr 170px;
+  gap: 10px;
+}
+
+.imu-group,
+.imu-temp {
+  min-width: 0;
+  padding: 10px;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.imu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 7px;
+}
+
+.imu-card {
+  padding: 7px 6px;
+  text-align: center;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.imu-card span {
+  display: block;
+  margin-bottom: 2px;
+  color: var(--color-text-tertiary);
+  font-size: 8px;
+}
+
+.imu-card strong {
+  color: var(--color-accent-light);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.imu-temp {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.imu-temp strong {
+  margin-top: 6px;
+  color: var(--color-accent-light);
+  font-family: var(--font-mono);
+  font-size: 22px;
+}
+
+/* Rodapé */
+.status-bar {
+  justify-content: space-between;
+  gap: 16px;
+  padding: 8px 20px;
+  background: var(--color-bg-panel);
+  border-top: 1px solid var(--color-border);
+}
+
+.status-items {
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.status-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.status-item i {
+  font-size: 13px;
+}
+
+.status-item.ok {
+  color: var(--color-ok);
+}
+
+.status-item.muted {
+  color: var(--color-text-tertiary);
+}
+
+.status-vessel {
+  color: var(--color-text-tertiary);
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.status-vessel strong {
+  color: var(--color-text-secondary);
+  font-weight: 600;
+}
+
+/* Responsividade */
+@media (max-width: 1000px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stability-panel {
+    border-right: 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .sensors-panel {
+    border-right: 0;
+  }
+
+  .imu-groups {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .imu-temp {
+    min-height: 90px;
+  }
+}
+
+@media (max-width: 700px) {
+  .header {
+    padding: 11px 14px;
+  }
+
+  .header-meta {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+  }
+
+  .vessel-id {
+    display: none;
+  }
+
+  .header-title {
+    font-size: 16px;
+  }
+
+  .header-subtitle {
+    font-size: 8px;
+  }
+
+  .header-status {
+    font-size: 10px;
+  }
+
+  .overview-bar {
+    align-items: flex-start;
+    padding: 12px 14px;
+  }
+
+  .update-info {
+    flex-direction: column;
+    gap: 1px;
+    text-align: right;
+  }
+
+  .stability-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .vessel-svg {
+    max-height: none;
+  }
+
+  .stability-metrics {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .metric-card {
+    padding: 9px;
+  }
+
+  .metric-card strong {
+    font-size: 18px;
+  }
+
+  .imu-groups {
+    grid-template-columns: 1fr;
+  }
+
+  .imu-temp {
+    min-height: auto;
+  }
+
+  .status-bar {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 10px 14px;
+  }
+
+  .status-vessel {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 12px;
+  }
+
+  .panel {
+    padding: 13px 12px;
+  }
+
+  .panel-title {
+    margin-bottom: 10px;
+    font-size: 10px;
+  }
+
+  .overview-bar {
+    gap: 10px;
+  }
+
+  .overview-title {
+    font-size: 12px;
+  }
+
+  .draft-grid {
+    gap: 7px;
+  }
+
+  .draft-card {
+    padding: 9px;
+  }
+
+  .draft-value {
+    font-size: 19px;
+  }
+
+  .draft-value span {
+    font-size: 10px;
+  }
+
+  .pressure-label {
+    font-size: 9px;
+  }
+
+  .stability-metrics {
+    gap: 6px;
+  }
+
+  .metric-card {
+    padding: 8px 6px;
+    text-align: center;
+  }
+
+  .metric-card span {
+    font-size: 8px;
+  }
+
+  .metric-card strong {
+    font-size: 16px;
+  }
+
+  .metric-card small {
+    font-size: 7px;
+    letter-spacing: 0.4px;
+  }
+
+  .imu-card strong {
+    font-size: 11px;
+  }
+
+  .status-items {
+    gap: 9px 14px;
+  }
+
+  .status-item {
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 360px) {
+  .header-subtitle {
+    max-width: 145px;
+    line-height: 1.15;
+  }
+
+  .stability-metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .metric-card {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 3px 8px;
+    text-align: left;
+  }
+
+  .metric-card span {
+    grid-column: 1;
+  }
+
+  .metric-card strong {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
+
+  .metric-card small {
+    grid-column: 1;
+  }
+
+  .draft-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

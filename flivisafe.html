@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FluviSafe — Monitoramento de Embarcações</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+  <link rel="stylesheet" href="flivisafe.css" />
+</head>
+<body>
+  <div class="dashboard">
+    <header class="header">
+      <div class="header-brand">
+        <svg class="header-logo" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="18" cy="18" r="17" fill="#1D9E75" fill-opacity="0.15"/>
+          <path d="M7 22 Q11 19 18 20 Q25 21 29 18" stroke="#1D9E75" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+          <path d="M11 22 L11 15 L25 15 L27 22Z" fill="#1D9E75" fill-opacity="0.75"/>
+          <rect x="17" y="10" width="1.8" height="7" fill="#1D9E75"/>
+          <path d="M18.9 10 L23 12.5 L18.9 15Z" fill="#1D9E75"/>
+        </svg>
+        <div>
+          <div class="header-title">FluviSafe</div>
+          <div class="header-subtitle">SISTEMA DE MONITORAMENTO DE EMBARCAÇÕES</div>
+        </div>
+      </div>
+      <div class="header-meta">
+        <div class="vessel-id">RN-0847 <span>•</span> RIO NEGRO, AM</div>
+        <div class="header-status">
+          <span class="live-dot"></span>
+          <span>AO VIVO</span>
+          <span id="clock">--:--:--</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <section class="overview-bar" aria-label="Status geral">
+        <div class="overview-status">
+          <div class="status-indicator" id="systemIndicator"></div>
+          <div>
+            <div class="eyebrow">STATUS DA EMBARCAÇÃO</div>
+            <div class="overview-title" id="systemStatus">OPERAÇÃO NORMAL</div>
+          </div>
+        </div>
+        <div class="update-info">
+          <span>ÚLTIMA ATUALIZAÇÃO</span>
+          <strong id="lastUpdate">AGUARDANDO DADOS</strong>
+        </div>
+      </section>
+
+      <section class="dashboard-grid">
+        <article class="panel stability-panel">
+          <div class="panel-title"><i class="ti ti-ship" aria-hidden="true"></i> Estabilidade</div>
+          <div class="stability-layout">
+            <div class="vessel-wrap">
+              <svg class="vessel-svg" viewBox="0 0 380 275" xmlns="http://www.w3.org/2000/svg" aria-label="Visualização da estabilidade da embarcação">
+                <defs>
+                  <linearGradient id="waterGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#1D9E75" stop-opacity="0.5"/>
+                    <stop offset="100%" stop-color="#085041" stop-opacity="0.8"/>
+                  </linearGradient>
+                  <clipPath id="waterClip"><rect x="0" y="150" width="380" height="125"/></clipPath>
+                </defs>
+                <line x1="0" y1="153" x2="380" y2="153" stroke="#1D9E75" stroke-width="0.5" opacity="0.4"/>
+                <g clip-path="url(#waterClip)">
+                  <rect x="0" y="150" width="380" height="125" fill="url(#waterGrad)" opacity="0.35"/>
+                  <g class="wave-anim">
+                    <path d="M0 158 Q20 153 40 158 Q60 163 80 158 Q100 153 120 158 Q140 163 160 158 Q180 153 200 158 Q220 163 240 158 Q260 153 280 158 Q300 163 320 158 Q340 153 360 158 Q380 163 400 158" fill="none" stroke="#1D9E75" stroke-width="1.5" opacity="0.6"/>
+                    <path d="M0 166 Q25 161 50 166 Q75 171 100 166 Q125 161 150 166 Q175 171 200 166 Q225 161 250 166 Q275 171 300 166 Q325 161 350 166 Q375 171 400 166" fill="none" stroke="#1D9E75" stroke-width="1" opacity="0.3"/>
+                  </g>
+                </g>
+                <line x1="60" y1="150" x2="60" y2="235" stroke="currentColor" stroke-width="0.5" opacity="0.3" stroke-dasharray="3,3"/>
+                <text x="50" y="154" font-size="8" text-anchor="middle" fill="currentColor" opacity="0.5">0m</text>
+                <text x="50" y="194" font-size="8" text-anchor="middle" fill="currentColor" opacity="0.5">1m</text>
+                <text x="50" y="234" font-size="8" text-anchor="middle" fill="currentColor" opacity="0.5">2m</text>
+                <text x="14" y="195" font-size="8" fill="#1D9E75" opacity="0.9">BOW-P</text>
+                <text x="14" y="215" font-size="8" fill="#1D9E75" opacity="0.9">MID-P</text>
+                <text x="14" y="240" font-size="8" fill="#1D9E75" opacity="0.9">MID-S</text>
+                <text x="14" y="265" font-size="8" fill="#1D9E75" opacity="0.9">BOW-S</text>
+                <g class="vessel-group">
+                  <path d="M90 185 Q95 205 108 212 L272 212 Q285 205 290 185 Z" fill="#0F6E56" opacity="0.9"/>
+                  <rect x="102" y="160" width="176" height="26" rx="3" fill="#0F6E56"/>
+                  <rect x="138" y="133" width="104" height="28" rx="4" fill="#085041"/>
+                  <rect x="160" y="112" width="60" height="23" rx="3" fill="#085041"/>
+                  <rect x="144" y="140" width="12" height="8" rx="2" fill="#9FE1CB" opacity="0.8"/>
+                  <rect x="163" y="140" width="12" height="8" rx="2" fill="#9FE1CB" opacity="0.8"/>
+                  <rect x="182" y="140" width="12" height="8" rx="2" fill="#9FE1CB" opacity="0.8"/>
+                  <rect x="201" y="140" width="12" height="8" rx="2" fill="#9FE1CB" opacity="0.8"/>
+                  <rect x="220" y="140" width="12" height="8" rx="2" fill="#9FE1CB" opacity="0.8"/>
+                  <line x1="190" y1="112" x2="190" y2="84" stroke="#0F6E56" stroke-width="2"/>
+                  <line x1="190" y1="90" x2="210" y2="97" stroke="#0F6E56" stroke-width="1" opacity="0.6"/>
+                  <circle cx="115" cy="200" r="4" fill="#FAC775" opacity="0.9"/>
+                  <circle cx="155" cy="202" r="4" fill="#FAC775" opacity="0.9"/>
+                  <circle cx="225" cy="202" r="4" fill="#FAC775" opacity="0.9"/>
+                  <circle cx="265" cy="200" r="4" fill="#FAC775" opacity="0.9"/>
+                </g>
+                <g transform="translate(330, 85)">
+                  <circle cx="0" cy="0" r="32" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.25"/>
+                  <circle cx="0" cy="0" r="28" fill="none" stroke="currentColor" stroke-width="0.5" stroke-dasharray="4,4" opacity="0.2"/>
+                  <line x1="-32" y1="0" x2="32" y2="0" stroke="currentColor" stroke-width="0.5" opacity="0.25"/>
+                  <line x1="0" y1="-32" x2="0" y2="32" stroke="currentColor" stroke-width="0.5" opacity="0.25"/>
+                  <circle id="attBubble" cx="3.5" cy="-1.5" r="7" fill="#1D9E75" opacity="0.8"/>
+                  <circle id="attBubble2" cx="3.5" cy="-1.5" r="7" fill="none" stroke="#9FE1CB" stroke-width="1"/>
+                  <text x="0" y="43" font-size="7.5" text-anchor="middle" fill="currentColor" opacity="0.5">INCLINÔMETRO</text>
+                </g>
+              </svg>
+            </div>
+            <div class="stability-metrics">
+              <div class="metric-card"><span>ROLL</span><strong id="rollVal">1.2°</strong><small id="rollStatus">NORMAL</small></div>
+              <div class="metric-card"><span>TRIM</span><strong id="trimVal">0.8°</strong><small id="trimStatus">NORMAL</small></div>
+              <div class="metric-card metric-card--wide"><span>ESTABILIDADE</span><strong id="stability">BOA</strong><small>GM &gt; 0.3 m</small></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel sensors-panel">
+          <div class="panel-title"><i class="ti ti-gauge" aria-hidden="true"></i> Sensores Hidroestáticos</div>
+          <div class="draft-grid">
+            <div class="draft-card"><div class="sensor-head"><span>PROA BB</span><b id="s1badge">OK</b></div><div class="draft-value" id="d1">1.42<span>m</span></div><div class="bar-track"><div class="bar-fill" id="b1" style="width:71%"></div></div><div class="pressure-label">Pressão <span id="p1">14.2</span> kPa</div></div>
+            <div class="draft-card"><div class="sensor-head"><span>PROA EB</span><b id="s2badge">OK</b></div><div class="draft-value" id="d2">1.38<span>m</span></div><div class="bar-track"><div class="bar-fill" id="b2" style="width:69%"></div></div><div class="pressure-label">Pressão <span id="p2">13.8</span> kPa</div></div>
+            <div class="draft-card"><div class="sensor-head"><span>POPA BB</span><b id="s3badge">OK</b></div><div class="draft-value" id="d3">1.51<span>m</span></div><div class="bar-track"><div class="bar-fill" id="b3" style="width:75.5%"></div></div><div class="pressure-label">Pressão <span id="p3">15.1</span> kPa</div></div>
+            <div class="draft-card"><div class="sensor-head"><span>POPA EB</span><b id="s4badge">OK</b></div><div class="draft-value" id="d4">1.48<span>m</span></div><div class="bar-track"><div class="bar-fill" id="b4" style="width:74%"></div></div><div class="pressure-label">Pressão <span id="p4">14.8</span> kPa</div></div>
+          </div>
+        </article>
+      </section>
+
+      <section class="panel imu-panel">
+        <div class="panel-title"><i class="ti ti-rotate-3d" aria-hidden="true"></i> Movimento e Temperatura <span class="panel-caption">MPU-6050</span></div>
+        <div class="imu-groups">
+          <div class="imu-group"><span class="group-label">ACELERAÇÃO</span><div class="imu-grid"><div class="imu-card"><span>X</span><strong id="ax">+0.12 g</strong></div><div class="imu-card"><span>Y</span><strong id="ay">-0.08 g</strong></div><div class="imu-card"><span>Z</span><strong id="az">+0.98 g</strong></div></div></div>
+          <div class="imu-group"><span class="group-label">GIRO</span><div class="imu-grid"><div class="imu-card"><span>X</span><strong id="gx">0.4 °/s</strong></div><div class="imu-card"><span>Y</span><strong id="gy">-0.3 °/s</strong></div><div class="imu-card"><span>Z</span><strong id="gz">0.0 °/s</strong></div></div></div>
+          <div class="imu-temp"><span class="group-label">TEMPERATURA IMU</span><strong id="tmp">32.4 °C</strong></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="status-bar">
+      <div class="status-items"><div class="status-item ok"><i class="ti ti-wifi"></i> LoRa conectado</div><div class="status-item muted"><i class="ti ti-cpu"></i> Raspberry Pi</div><div class="status-item muted"><i class="ti ti-map-pin"></i> Rio Negro, AM</div></div>
+      <div class="status-vessel">FluviSafe v2.0 · Embarcação: <strong>RN-0847</strong></div>
+    </footer>
+  </div>
+  <script src="flivisafe.js"></script>
+</body>
+</html>
