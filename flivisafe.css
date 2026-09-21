@@ -1201,3 +1201,370 @@ body {
     font-size: 14px;
   }
 }
+
+/* =========================================================
+   RESPONSIVIDADE FINAL - LEGIBILIDADE SEM ALTERAR FUNCOES
+   Este bloco apenas reorganiza e dimensiona a interface.
+   ========================================================= */
+
+/* Telas intermediarias: tablets, notebooks menores e monitores pequenos */
+@media (min-width: 601px) and (max-width: 1200px) {
+  .panel,
+  .cam-panel,
+  .people-panel {
+    padding: 18px 20px;
+  }
+
+  .panel-title {
+    font-size: 12px;
+    margin-bottom: 14px;
+  }
+
+  .draft-card {
+    padding: 12px 14px;
+  }
+
+  .sensor-name {
+    font-size: 10px;
+  }
+
+  .draft-value {
+    font-size: 24px;
+  }
+
+  .pressure-label {
+    font-size: 10px;
+  }
+
+  .imu-card {
+    padding: 11px 10px;
+  }
+
+  .imu-card .label {
+    font-size: 10px;
+  }
+
+  .imu-card .value {
+    font-size: 15px;
+  }
+
+  .stab-card .label {
+    font-size: 10px;
+  }
+
+  .stab-card .value {
+    font-size: 22px;
+  }
+}
+
+/* =========================================================
+   CELULAR
+   Prioridade: leitura, toque e aproveitamento da largura.
+   ========================================================= */
+@media (max-width: 600px) {
+  html,
+  body {
+    width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+    font-size: 15px;
+  }
+
+  .dashboard {
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Cabecalho em duas linhas para evitar texto/botao cortado */
+  .header {
+    width: 100%;
+    min-width: 0;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 9px 10px;
+    padding: 12px 14px;
+  }
+
+  .header-brand {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .header-logo {
+    width: 34px;
+    height: 34px;
+  }
+
+  .header-title {
+    font-size: 19px;
+    line-height: 1.1;
+  }
+
+  .header-subtitle {
+    max-width: none;
+    font-size: 9.5px;
+    line-height: 1.25;
+  }
+
+  .header-status {
+    flex: 1 1 100%;
+    min-width: 0;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: 10px;
+    white-space: normal;
+  }
+
+  /* O botao criado pelo JS continua funcionando, apenas fica maior para toque */
+  .header-status button {
+    flex-shrink: 0;
+    margin-left: auto !important;
+    padding: 7px 11px !important;
+    font-size: 10px !important;
+    min-height: 32px;
+  }
+
+  .mid-grid,
+  .bottom-grid {
+    display: block;
+    width: 100%;
+  }
+
+  .panel,
+  .cam-panel,
+  .people-panel {
+    width: 100%;
+    padding: 16px 14px;
+    border-right: none;
+  }
+
+  .panel-title {
+    font-size: 12px;
+    letter-spacing: 0.7px;
+    line-height: 1.25;
+    margin-bottom: 13px;
+  }
+
+  .panel-title i {
+    font-size: 14px;
+  }
+
+  /* Em vez de ocupar quase a tela inteira, a embarcacao ganha uma altura controlada */
+  .vessel-svg {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: clamp(230px, 58vw, 320px);
+    object-fit: contain;
+    object-position: center;
+  }
+
+  /* Dados de estabilidade com tamanho confortavel */
+  .stability-cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px;
+    margin-top: 12px;
+  }
+
+  .stab-card {
+    min-width: 0;
+    padding: 11px 10px;
+  }
+
+  .stab-card .label {
+    font-size: 9px;
+    letter-spacing: 0.8px;
+    margin-bottom: 5px;
+  }
+
+  .stab-card .value {
+    font-size: 21px;
+  }
+
+  .status-ok {
+    font-size: 9px;
+  }
+
+  /* Sensores hidrostáticos: duas colunas, valores grandes */
+  .draft-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .draft-card {
+    min-width: 0;
+    padding: 12px 11px;
+  }
+
+  .draft-card .row {
+    gap: 6px;
+  }
+
+  .sensor-name {
+    font-size: 9px;
+    letter-spacing: 0.7px;
+  }
+
+  .badge-ok {
+    font-size: 8px;
+    padding: 2px 5px;
+  }
+
+  .draft-value {
+    font-size: 23px;
+    line-height: 1.15;
+    margin-bottom: 9px;
+  }
+
+  .draft-value span {
+    font-size: 12px;
+  }
+
+  .bar-track {
+    height: 5px;
+    margin-bottom: 7px;
+  }
+
+  .pressure-label {
+    font-size: 9.5px;
+    white-space: normal;
+    line-height: 1.3;
+  }
+
+  /* IMU: duas colunas deixam X/Y/Z realmente legiveis */
+  .imu-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px;
+  }
+
+  .imu-card {
+    min-width: 0;
+    padding: 11px 9px;
+    min-height: 58px;
+  }
+
+  .imu-card .label {
+    font-size: 9px;
+    letter-spacing: 0.6px;
+    margin-bottom: 5px;
+  }
+
+  .imu-card .value {
+    font-size: 14px;
+    white-space: nowrap;
+  }
+
+  /* Temperatura e demais blocos ocupam toda a largura quando necessario */
+  .equip-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px;
+  }
+
+  /* Barra inferior sem esmagar as informacoes */
+  .status-bar {
+    width: 100%;
+    padding: 11px 14px;
+    flex-wrap: wrap;
+    gap: 9px 16px;
+  }
+
+  .status-items {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 9px 16px;
+  }
+
+  .status-item,
+  .status-vessel {
+    font-size: 10px;
+  }
+}
+
+/* Celulares estreitos */
+@media (max-width: 420px) {
+  .header {
+    padding: 11px 12px;
+  }
+
+  .header-logo {
+    width: 32px;
+    height: 32px;
+  }
+
+  .header-title {
+    font-size: 18px;
+  }
+
+  .header-subtitle {
+    font-size: 9px;
+  }
+
+  .header-status {
+    font-size: 9.5px;
+  }
+
+  .panel,
+  .cam-panel,
+  .people-panel {
+    padding: 15px 12px;
+  }
+
+  .panel-title {
+    font-size: 11.5px;
+  }
+
+  .vessel-svg {
+    height: clamp(215px, 60vw, 275px);
+  }
+
+  .draft-card {
+    padding: 11px 9px;
+  }
+
+  .draft-value {
+    font-size: 21px;
+  }
+
+  .pressure-label {
+    font-size: 9px;
+  }
+
+  .imu-card {
+    padding: 10px 8px;
+  }
+
+  .imu-card .value {
+    font-size: 13.5px;
+  }
+}
+
+/* Celulares muito estreitos: uma coluna evita qualquer aperto de texto */
+@media (max-width: 360px) {
+  .header-title {
+    font-size: 17px;
+  }
+
+  .header-subtitle {
+    font-size: 8.5px;
+  }
+
+  .stability-cards,
+  .draft-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .draft-value {
+    font-size: 23px;
+  }
+
+  .imu-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .imu-card .value {
+    font-size: 14px;
+  }
+}
