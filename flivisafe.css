@@ -1,36 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600&display=swap');
 
 :root {
-  --color-bg:            #080f0e;
-  --color-bg-panel:      #0c1614;
-  --color-bg-card:       #0f1f1b;
-  --color-bg-card-hover: #132620;
-  --color-border:        #1a2e28;
-  --color-border-soft:   #152520;
-
-  --color-accent:        #1D9E75;
-  --color-accent-dim:    #17785a;
-  --color-accent-glow:   rgba(29,158,117,0.18);
-  --color-accent-light:  #9FE1CB;
-
-  --color-text-primary:   #e2ede9;
+  --color-bg: #080f0e;
+  --color-bg-panel: #0c1614;
+  --color-bg-card: #0f1f1b;
+  --color-border: #1a2e28;
+  --color-accent: #1d9e75;
+  --color-accent-dim: #17785a;
+  --color-accent-glow: rgba(29, 158, 117, 0.18);
+  --color-accent-light: #9fe1cb;
+  --color-text-primary: #e2ede9;
   --color-text-secondary: #7da898;
-  --color-text-tertiary:  #4a6e62;
-
-  --color-ok:      #1D9E75;
-  --color-ok-bg:   rgba(29,158,117,0.12);
-  --color-warn:    #FAC775;
-  --color-warn-bg: rgba(250,199,117,0.12);
-  --color-danger:  #f56565;
-
-  --font-ui:   'Space Grotesk', system-ui, sans-serif;
+  --color-text-tertiary: #4a6e62;
+  --color-ok: #1d9e75;
+  --color-ok-bg: rgba(29, 158, 117, 0.12);
+  --color-warn: #fac775;
+  --color-danger: #f56565;
+  --font-ui: 'Space Grotesk', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
-
   --radius-sm: 4px;
   --radius-md: 8px;
-  --radius-lg: 12px;
-
-  --transition: 0.2s ease;
 }
 
 *,
@@ -43,7 +32,8 @@
 
 html,
 body {
-  height: 100%;
+  min-width: 0;
+  min-height: 100%;
   background: var(--color-bg);
   color: var(--color-text-primary);
   font-family: var(--font-ui);
@@ -52,33 +42,42 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-
-/* ─── DASHBOARD ─────────────────────────────────────────── */
+body {
+  overflow-x: hidden;
+}
 
 .dashboard {
-  display: grid;
-  grid-template-rows: auto 1fr auto auto;
+  width: 100%;
+  max-width: 1600px;
   min-height: 100vh;
-  max-width: 1440px;
   margin: 0 auto;
 }
 
-
-/* ─── HEADER ─────────────────────────────────────────────── */
-
+/* Header */
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 20px;
+  min-height: 64px;
   padding: 12px 20px;
-  border-bottom: 1px solid var(--color-border);
   background: var(--color-bg-panel);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.header-brand,
+.header-meta,
+.header-status,
+.overview-status,
+.status-bar,
+.status-items {
+  display: flex;
+  align-items: center;
 }
 
 .header-brand {
-  display: flex;
-  align-items: center;
   gap: 12px;
+  min-width: 0;
 }
 
 .header-logo {
@@ -88,31 +87,48 @@ body {
 }
 
 .header-title {
+  color: var(--color-accent-light);
   font-size: 18px;
   font-weight: 600;
-  color: var(--color-accent-light);
   letter-spacing: -0.3px;
 }
 
 .header-subtitle {
-  font-size: 11px;
   color: var(--color-text-tertiary);
   font-family: var(--font-mono);
+  font-size: 11px;
   letter-spacing: 0.3px;
 }
 
+.header-meta {
+  gap: 24px;
+  min-width: 0;
+}
+
+.vessel-id {
+  color: var(--color-text-tertiary);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.6px;
+  white-space: nowrap;
+}
+
+.vessel-id span {
+  margin: 0 5px;
+  color: var(--color-border);
+}
+
 .header-status {
-  display: flex;
-  align-items: center;
   gap: 8px;
+  color: var(--color-text-secondary);
   font-family: var(--font-mono);
   font-size: 12px;
-  color: var(--color-text-secondary);
 }
 
 .live-dot {
   width: 7px;
   height: 7px;
+  flex: 0 0 auto;
   border-radius: 50%;
   background: var(--color-accent);
   box-shadow: 0 0 6px var(--color-accent);
@@ -120,59 +136,92 @@ body {
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; box-shadow: 0 0 6px var(--color-accent); }
-  50%       { opacity: 0.5; box-shadow: 0 0 2px var(--color-accent); }
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 6px var(--color-accent);
+  }
+
+  50% {
+    opacity: 0.5;
+    box-shadow: 0 0 2px var(--color-accent);
+  }
 }
 
+/* Conteúdo principal */
+.main-content {
+  min-width: 0;
+}
 
-/* ─── GRIDS ──────────────────────────────────────────────── */
-
-.mid-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+.overview-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 14px 20px;
+  background: var(--color-bg-panel);
   border-bottom: 1px solid var(--color-border);
 }
 
-.bottom-grid {
-  display: grid;
-  grid-template-columns: 1fr 260px;
-  border-bottom: 1px solid var(--color-border);
+.overview-status {
+  gap: 10px;
 }
 
-.mid-border {
-  border-top: 1px solid var(--color-border);
+.status-indicator {
+  width: 9px;
+  height: 9px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--color-ok);
+  box-shadow: 0 0 10px var(--color-accent);
 }
 
+.eyebrow,
+.group-label {
+  color: var(--color-text-tertiary);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
 
-/* ─── PANEL ──────────────────────────────────────────────── */
+.overview-title {
+  margin-top: 1px;
+  color: var(--color-accent-light);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 600;
+}
 
+.update-info {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  color: var(--color-text-tertiary);
+  font-family: var(--font-mono);
+  font-size: 9px;
+}
+
+.update-info strong {
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+/* Painéis */
 .panel {
+  min-width: 0;
   padding: 16px 18px;
-  border-right: 1px solid var(--color-border);
-}
-
-.panel--no-border-right {
-  border-right: none;
 }
 
 .panel-title {
   display: flex;
   align-items: center;
   gap: 6px;
+  margin-bottom: 14px;
+  color: var(--color-text-secondary);
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.8px;
   text-transform: uppercase;
-  color: var(--color-text-secondary);
-  margin-bottom: 14px;
-}
-
-.panel-title--spaced {
-  margin-bottom: 8px;
-}
-
-.panel-title--inline {
-  margin-bottom: 0;
 }
 
 .panel-title i {
@@ -180,134 +229,163 @@ body {
   font-size: 14px;
 }
 
+.panel-caption {
+  margin-left: auto;
+  color: var(--color-text-tertiary);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+}
 
-/* ─── VESSEL SVG ─────────────────────────────────────────── */
+/* Estabilidade e sensores */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.stability-panel {
+  border-right: 1px solid var(--color-border);
+}
+
+.stability-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(190px, 0.7fr);
+  align-items: center;
+  gap: 12px;
+}
+
+.vessel-wrap {
+  min-width: 0;
+}
 
 .vessel-svg {
+  display: block;
   width: 100%;
   height: auto;
-  display: block;
+  max-height: 300px;
   color: var(--color-text-primary);
 }
 
 @keyframes waveMove {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-80px); }
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-80px);
+  }
 }
 
 .wave-anim {
   animation: waveMove 4s linear infinite;
 }
 
-
-/* ─── STABILITY CARDS ────────────────────────────────────── */
-
-.stability-cards {
-  display: flex;
-  gap: 10px;
-  margin-top: 12px;
+.stability-metrics {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
 }
 
-.stab-card {
-  flex: 1;
+.metric-card {
+  padding: 11px 12px;
   background: var(--color-bg-card);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  padding: 10px 12px;
-  text-align: center;
 }
 
-.stab-card .label {
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+.metric-card span,
+.sensor-head > span {
   color: var(--color-text-tertiary);
-  margin-bottom: 4px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
 }
 
-.stab-card .value {
-  font-family: var(--font-mono);
-  font-size: 20px;
-  font-weight: 600;
+.metric-card span {
+  display: block;
+}
+
+.metric-card strong {
+  display: block;
+  margin: 3px 0 2px;
   color: var(--color-text-primary);
+  font-family: var(--font-mono);
+  font-size: 21px;
   line-height: 1.1;
-  margin-bottom: 4px;
 }
 
-.status-ok {
+.metric-card small {
+  color: var(--color-ok);
   font-size: 9px;
   font-weight: 600;
-  letter-spacing: 0.8px;
+  letter-spacing: 0.7px;
   text-transform: uppercase;
-  color: var(--color-ok);
 }
 
+.metric-card--wide strong {
+  color: var(--color-accent-light);
+}
 
-/* ─── DRAFT GRID ─────────────────────────────────────────── */
+.sensors-panel {
+  border-right: 0;
+}
 
 .draft-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
-  margin-bottom: 16px;
 }
 
 .draft-card {
+  min-width: 0;
+  padding: 10px 12px;
   background: var(--color-bg-card);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  padding: 10px 12px;
 }
 
-.draft-card .row {
+.sensor-head {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 6px;
+  gap: 8px;
+  margin-bottom: 5px;
 }
 
-.sensor-name {
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--color-text-tertiary);
-}
-
-.badge-ok {
-  font-size: 8px;
-  font-weight: 700;
-  letter-spacing: 0.6px;
-  text-transform: uppercase;
+.sensor-head b {
+  padding: 1px 5px;
   color: var(--color-ok);
   background: var(--color-ok-bg);
-  border: 1px solid rgba(29,158,117,0.25);
+  border: 1px solid rgba(29, 158, 117, 0.25);
   border-radius: var(--radius-sm);
-  padding: 1px 5px;
+  font-size: 8px;
+  letter-spacing: 0.7px;
 }
 
 .draft-value {
-  font-family: var(--font-mono);
-  font-size: 22px;
-  font-weight: 600;
-  color: var(--color-text-primary);
-  line-height: 1.1;
   margin-bottom: 8px;
+  color: var(--color-text-primary);
+  font-family: var(--font-mono);
+  font-size: 23px;
+  font-weight: 600;
+  line-height: 1.1;
 }
 
 .draft-value span {
-  font-size: 12px;
-  color: var(--color-text-tertiary);
   margin-left: 2px;
+  color: var(--color-text-tertiary);
+  font-size: 12px;
 }
 
 .bar-track {
   height: 4px;
-  background: var(--color-border);
-  border-radius: 2px;
   margin-bottom: 6px;
   overflow: hidden;
+  background: var(--color-border);
+  border-radius: 2px;
 }
 
 .bar-fill {
@@ -318,227 +396,89 @@ body {
 }
 
 .pressure-label {
-  font-size: 10px;
   color: var(--color-text-tertiary);
   font-family: var(--font-mono);
+  font-size: 10px;
 }
 
 .pressure-label span {
   color: var(--color-text-secondary);
 }
 
+/* IMU */
+.imu-panel {
+  border-bottom: 1px solid var(--color-border);
+}
 
-/* ─── IMU GRID ───────────────────────────────────────────── */
-
-.imu-grid {
+.imu-groups {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-}
-
-.imu-card {
-  background: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  padding: 8px 10px;
-  text-align: center;
-}
-
-.imu-card .label {
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-  color: var(--color-text-tertiary);
-  margin-bottom: 4px;
-}
-
-.imu-card .value {
-  font-family: var(--font-mono);
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--color-accent-light);
-}
-
-
-/* ─── CAM PANEL ──────────────────────────────────────────── */
-
-.cam-panel {
-  padding: 16px 18px;
-  border-right: 1px solid var(--color-border);
-}
-
-.cam-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 14px;
-}
-
-.cam-conf-label {
-  font-size: 10px;
-  color: var(--color-text-tertiary);
-  font-family: var(--font-mono);
-}
-
-.equip-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 8px;
-}
-
-
-/* ─── PEOPLE PANEL ───────────────────────────────────────── */
-
-.people-panel {
-  padding: 16px 18px;
-  display: flex;
-  flex-direction: column;
+  grid-template-columns: 1fr 1fr 170px;
   gap: 10px;
 }
 
-.people-center {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  padding: 10px 0;
+.imu-group,
+.imu-temp {
+  min-width: 0;
+  padding: 10px;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
 }
 
-.people-circle {
-  position: relative;
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  border: 2px solid var(--color-accent);
-  background: var(--color-accent-glow);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 6px;
+.imu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 7px;
 }
 
-.people-circle .count {
-  font-family: var(--font-mono);
-  font-size: 28px;
-  font-weight: 600;
-  color: var(--color-accent-light);
-  line-height: 1;
-}
-
-.people-badge {
-  position: absolute;
-  bottom: -4px;
-  right: -4px;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: var(--color-accent);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.people-badge i {
-  font-size: 11px;
-  color: #fff;
-}
-
-.people-center .sub {
-  font-size: 11px;
-  color: var(--color-text-secondary);
-  font-weight: 500;
-}
-
-.people-center .cap {
-  font-size: 10px;
-  color: var(--color-text-tertiary);
-  font-family: var(--font-mono);
-}
-
-.cap-bar {
-  height: 5px;
-  background: var(--color-border);
-  border-radius: 3px;
-  overflow: hidden;
-}
-
-.cap-fill {
-  height: 100%;
-  width: 50%;
-  background: linear-gradient(90deg, var(--color-accent-dim), var(--color-accent));
-  border-radius: 3px;
-}
-
-.cap-percent {
-  font-size: 10px;
-  color: var(--color-text-tertiary);
+.imu-card {
+  padding: 7px 6px;
   text-align: center;
-  font-family: var(--font-mono);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
 }
 
-.dist-section {
+.imu-card span {
+  display: block;
+  margin-bottom: 2px;
+  color: var(--color-text-tertiary);
+  font-size: 8px;
+}
+
+.imu-card strong {
+  color: var(--color-accent-light);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.imu-temp {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  justify-content: center;
 }
 
-.dist-title {
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--color-text-tertiary);
-  margin-bottom: 2px;
-}
-
-.dist-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 11px;
-  color: var(--color-text-secondary);
-  padding: 3px 0;
-  border-bottom: 1px solid var(--color-border-soft);
-}
-
-.dist-row .num {
+.imu-temp strong {
+  margin-top: 6px;
+  color: var(--color-accent-light);
   font-family: var(--font-mono);
-  font-weight: 600;
-  color: var(--color-text-primary);
+  font-size: 22px;
 }
 
-.warning-tag {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 10px;
-  color: var(--color-warn);
-  background: var(--color-warn-bg);
-  border: 1px solid rgba(250,199,117,0.2);
-  border-radius: var(--radius-sm);
-  padding: 5px 8px;
-}
-
-.warning-tag i {
-  font-size: 12px;
-}
-
-
-/* ─── STATUS BAR ─────────────────────────────────────────── */
-
+/* Rodapé */
 .status-bar {
-  display: flex;
-  align-items: center;
   justify-content: space-between;
+  gap: 16px;
   padding: 8px 20px;
   background: var(--color-bg-panel);
   border-top: 1px solid var(--color-border);
 }
 
 .status-items {
-  display: flex;
-  align-items: center;
+  flex-wrap: wrap;
   gap: 20px;
 }
 
@@ -546,8 +486,8 @@ body {
   display: flex;
   align-items: center;
   gap: 5px;
-  font-size: 11px;
   font-family: var(--font-mono);
+  font-size: 11px;
 }
 
 .status-item i {
@@ -563,9 +503,9 @@ body {
 }
 
 .status-vessel {
-  font-size: 11px;
   color: var(--color-text-tertiary);
   font-family: var(--font-mono);
+  font-size: 11px;
 }
 
 .status-vessel strong {
@@ -573,287 +513,100 @@ body {
   font-weight: 600;
 }
 
-/* =========================================================
-   RESPONSIVIDADE - AJUSTES EXCLUSIVOS DE INTERFACE
-   Apenas adapta tamanho, espacamento e disposicao para diferentes telas.
-   Nenhuma funcionalidade ou regra de dados foi alterada.
-   ========================================================= */
-
-/* Monitores menores, notebooks e tablets em paisagem */
-@media (max-width: 1100px) {
-  .dashboard {
-    width: 100%;
-    max-width: 1440px;
-  }
-
-  .header {
-    padding: 12px 18px;
-  }
-
-  .panel,
-  .cam-panel,
-  .people-panel {
-    padding: 15px 16px;
-  }
-
-  .mid-grid,
-  .bottom-grid {
+/* Responsividade */
+@media (max-width: 1000px) {
+  .dashboard-grid {
     grid-template-columns: 1fr;
   }
 
-  .panel,
-  .cam-panel,
-  .people-panel {
-    border-right: none;
+  .stability-panel {
+    border-right: 0;
+    border-bottom: 1px solid var(--color-border);
   }
 
-  .status-bar {
-    flex-wrap: wrap;
-    gap: 10px 18px;
-  }
-}
-
-/* Tablets e celulares em paisagem */
-@media (max-width: 900px) {
-  html,
-  body {
-    width: 100%;
-    min-width: 0;
-    overflow-x: hidden;
+  .sensors-panel {
+    border-right: 0;
   }
 
-  .header {
-    padding: 13px 16px;
+  .imu-groups {
+    grid-template-columns: 1fr 1fr;
   }
 
-  .header-title {
-    font-size: 18px;
-  }
-
-  .header-subtitle {
-    font-size: 10px;
-  }
-
-  .header-status {
-    font-size: 11px;
-  }
-
-  .panel,
-  .cam-panel,
-  .people-panel {
-    padding: 16px;
-  }
-
-  .panel-title {
-    font-size: 10px;
-    margin-bottom: 12px;
-  }
-
-  .draft-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .imu-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  .imu-temp {
+    min-height: 90px;
   }
 }
 
-/* Celulares: interface mais legivel e aproveitamento total da tela */
-@media (max-width: 600px) {
-  html,
-  body {
-    font-size: 14px;
-    min-width: 0;
-    overflow-x: hidden;
-  }
-
-  .dashboard {
-    display: block;
-    width: 100%;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-
+@media (max-width: 700px) {
   .header {
-    width: 100%;
-    padding: 13px 14px;
-    gap: 12px;
+    padding: 11px 14px;
   }
 
-  .header-brand {
-    min-width: 0;
-    gap: 9px;
+  .header-meta {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
   }
 
-  .header-logo {
-    width: 32px;
-    height: 32px;
+  .vessel-id {
+    display: none;
   }
 
   .header-title {
-    font-size: 17px;
+    font-size: 16px;
   }
 
   .header-subtitle {
-    max-width: 210px;
-    font-size: 9px;
-    line-height: 1.3;
+    font-size: 8px;
   }
 
   .header-status {
-    flex-shrink: 0;
-    gap: 5px;
-    font-size: 9px;
-    white-space: nowrap;
-  }
-
-  .live-dot {
-    width: 7px;
-    height: 7px;
-  }
-
-  .mid-grid,
-  .bottom-grid {
-    display: block;
-    width: 100%;
-  }
-
-  .panel,
-  .cam-panel,
-  .people-panel {
-    width: 100%;
-    padding: 14px;
-    border-right: none;
-  }
-
-  .panel-title {
     font-size: 10px;
-    letter-spacing: 0.7px;
-    margin-bottom: 12px;
   }
 
-  .panel-title i {
-    font-size: 13px;
+  .overview-bar {
+    align-items: flex-start;
+    padding: 12px 14px;
+  }
+
+  .update-info {
+    flex-direction: column;
+    gap: 1px;
+    text-align: right;
+  }
+
+  .stability-layout {
+    grid-template-columns: 1fr;
   }
 
   .vessel-svg {
-    display: block;
-    width: 100%;
-    max-width: 100%;
-    height: auto;
+    max-height: none;
   }
 
-  /* Cards de estabilidade continuam lado a lado, mas ganham espaco */
-  .stability-cards {
-    gap: 8px;
-    margin-top: 10px;
+  .stability-metrics {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .stab-card {
-    min-width: 0;
-    padding: 10px 8px;
+  .metric-card {
+    padding: 9px;
   }
 
-  .stab-card .label {
-    font-size: 8px;
-    letter-spacing: 0.8px;
+  .metric-card strong {
+    font-size: 18px;
   }
 
-  .stab-card .value {
-    font-size: 19px;
+  .imu-groups {
+    grid-template-columns: 1fr;
   }
 
-  .status-ok {
-    font-size: 8px;
+  .imu-temp {
+    min-height: auto;
   }
 
-  /* Sensores: duas colunas em celular normal */
-  .draft-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 9px;
-    margin-bottom: 14px;
-  }
-
-  .draft-card {
-    min-width: 0;
-    padding: 10px 11px;
-  }
-
-  .sensor-name {
-    font-size: 8px;
-    letter-spacing: 0.8px;
-  }
-
-  .badge-ok {
-    font-size: 8px;
-    padding: 2px 5px;
-  }
-
-  .draft-value {
-    font-size: 21px;
-    margin-bottom: 8px;
-  }
-
-  .draft-value span {
-    font-size: 11px;
-  }
-
-  .pressure-label {
-    font-size: 9px;
-    white-space: nowrap;
-  }
-
-  .bar-track {
-    height: 5px;
-  }
-
-  /* IMU: duas colunas para deixar os valores legiveis */
-  .imu-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 8px;
-  }
-
-  .imu-card {
-    min-width: 0;
-    padding: 9px 8px;
-  }
-
-  .imu-card .label {
-    font-size: 8px;
-    letter-spacing: 0.6px;
-  }
-
-  .imu-card .value {
-    font-size: 12px;
-    white-space: nowrap;
-  }
-
-  .equip-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .people-panel {
-    gap: 10px;
-  }
-
-  /* Rodape vira blocos legiveis, sem comprimir horizontalmente */
   .status-bar {
-    width: 100%;
-    padding: 10px 14px;
-    gap: 9px;
     align-items: flex-start;
     flex-direction: column;
-  }
-
-  .status-items {
-    width: 100%;
-    flex-wrap: wrap;
-    gap: 7px 14px;
-  }
-
-  .status-item,
-  .status-vessel {
-    font-size: 9px;
+    padding: 10px 14px;
   }
 
   .status-vessel {
@@ -861,35 +614,29 @@ body {
   }
 }
 
-/* Celulares estreitos */
-@media (max-width: 420px) {
-  .header {
-    align-items: flex-start;
+@media (max-width: 480px) {
+  body {
+    font-size: 12px;
   }
 
-  .header-brand {
-    flex: 1;
+  .panel {
+    padding: 13px 12px;
   }
 
-  .header-subtitle {
-    max-width: 165px;
+  .panel-title {
+    margin-bottom: 10px;
+    font-size: 10px;
   }
 
-  .header-status {
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 2px;
-    font-size: 8px;
+  .overview-bar {
+    gap: 10px;
   }
 
-  .panel,
-  .cam-panel,
-  .people-panel {
-    padding: 12px;
+  .overview-title {
+    font-size: 12px;
   }
 
-  .draft-grid,
-  .imu-grid {
+  .draft-grid {
     gap: 7px;
   }
 
@@ -901,670 +648,92 @@ body {
     font-size: 19px;
   }
 
-  .pressure-label {
-    font-size: 8px;
-  }
-
-  .imu-card {
-    padding: 8px 6px;
-  }
-
-  .imu-card .value {
-    font-size: 11px;
-  }
-}
-
-/* Celulares muito estreitos: uma coluna evita texto espremido */
-@media (max-width: 360px) {
-  .header-title {
-    font-size: 16px;
-  }
-
-  .header-subtitle {
-    max-width: 145px;
-    font-size: 8px;
-  }
-
-  .draft-grid,
-  .imu-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .draft-value {
-    font-size: 21px;
-  }
-
-  .imu-card .value {
-    font-size: 12px;
-  }
-}
-
-/* =========================================================
-   RESPONSIVIDADE - LEGIBILIDADE EM TELAS MENORES
-   Ajusta apenas escala visual, espacamento e distribuicao.
-   Nao altera HTML, JavaScript ou funcionalidades.
-   ========================================================= */
-
-/* Tablets, monitores menores e notebooks compactos */
-@media (min-width: 601px) and (max-width: 1200px) {
-  html,
-  body {
-    font-size: 14px;
-  }
-
-  .header {
-    padding: 14px 20px;
-  }
-
-  .header-title {
-    font-size: 20px;
-  }
-
-  .header-subtitle {
-    font-size: 11px;
-  }
-
-  .header-status {
-    font-size: 12px;
-  }
-
-  .panel,
-  .cam-panel,
-  .people-panel {
-    padding: 18px 20px;
-  }
-
-  .panel-title {
-    font-size: 12px;
-    margin-bottom: 15px;
-  }
-
-  .draft-card {
-    padding: 12px 14px;
-  }
-
-  .sensor-name {
-    font-size: 10px;
-  }
-
-  .draft-value {
-    font-size: 25px;
-  }
-
-  .pressure-label {
-    font-size: 10px;
-  }
-
-  .imu-card {
-    padding: 11px 10px;
-  }
-
-  .imu-card .label {
-    font-size: 10px;
-  }
-
-  .imu-card .value {
-    font-size: 14px;
-  }
-
-  .status-item,
-  .status-vessel {
-    font-size: 10px;
-  }
-}
-
-/* Celulares: prioridade para leitura */
-@media (max-width: 600px) {
-  html,
-  body {
-    font-size: 15px;
-  }
-
-  .header {
-    padding: 15px 15px;
-    gap: 12px;
-  }
-
-  .header-logo {
-    width: 34px;
-    height: 34px;
-  }
-
-  .header-title {
-    font-size: 19px;
-  }
-
-  .header-subtitle {
-    max-width: 220px;
-    font-size: 10px;
-    line-height: 1.35;
-  }
-
-  .header-status {
-    font-size: 10px;
-  }
-
-  .panel,
-  .cam-panel,
-  .people-panel {
-    padding: 16px 15px;
-  }
-
-  .panel-title {
-    font-size: 11px;
-    letter-spacing: 0.65px;
-    margin-bottom: 14px;
-  }
-
-  .panel-title i {
-    font-size: 15px;
-  }
-
-  .draft-grid {
-    gap: 10px;
-  }
-
-  .draft-card {
-    padding: 12px 12px;
-    border-radius: var(--radius-md);
-  }
-
-  .sensor-name {
-    font-size: 9px;
-  }
-
-  .badge-ok {
-    font-size: 9px;
-    padding: 2px 6px;
-  }
-
-  .draft-value {
-    font-size: 24px;
-    line-height: 1.15;
-  }
-
   .draft-value span {
-    font-size: 12px;
-  }
-
-  .pressure-label {
-    font-size: 9.5px;
-  }
-
-  .bar-track {
-    height: 5px;
-  }
-
-  .imu-grid {
-    gap: 9px;
-  }
-
-  .imu-card {
-    padding: 11px 9px;
-  }
-
-  .imu-card .label {
-    font-size: 9px;
-    margin-bottom: 5px;
-  }
-
-  .imu-card .value {
-    font-size: 14px;
-  }
-
-  .status-bar {
-    padding: 12px 15px;
-  }
-
-  .status-item,
-  .status-vessel {
     font-size: 10px;
-  }
-}
-
-/* Celulares estreitos: mantem leitura sem reduzir as fontes demais */
-@media (max-width: 420px) {
-  .header-title {
-    font-size: 18px;
-  }
-
-  .header-subtitle {
-    max-width: 180px;
-    font-size: 9px;
-  }
-
-  .header-status {
-    font-size: 9px;
-  }
-
-  .panel,
-  .cam-panel,
-  .people-panel {
-    padding: 15px 12px;
-  }
-
-  .panel-title {
-    font-size: 10.5px;
-  }
-
-  .draft-card {
-    padding: 11px 10px;
-  }
-
-  .draft-value {
-    font-size: 22px;
   }
 
   .pressure-label {
     font-size: 9px;
   }
 
-  .imu-card {
-    padding: 10px 8px;
-  }
-
-  .imu-card .value {
-    font-size: 13px;
-  }
-
-  .status-item,
-  .status-vessel {
-    font-size: 9px;
-  }
-}
-
-/* Celulares muito estreitos: uma coluna continua sendo a opcao mais legivel */
-@media (max-width: 360px) {
-  .header-title {
-    font-size: 17px;
-  }
-
-  .header-subtitle {
-    max-width: 160px;
-    font-size: 8.5px;
-  }
-
-  .header-status {
-    font-size: 8.5px;
-  }
-
-  .draft-grid,
-  .imu-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .draft-value {
-    font-size: 23px;
-  }
-
-  .imu-card .value {
-    font-size: 14px;
-  }
-}
-
-/* =========================================================
-   RESPONSIVIDADE FINAL - LEGIBILIDADE SEM ALTERAR FUNCOES
-   Este bloco apenas reorganiza e dimensiona a interface.
-   ========================================================= */
-
-/* Telas intermediarias: tablets, notebooks menores e monitores pequenos */
-@media (min-width: 601px) and (max-width: 1200px) {
-  .panel,
-  .cam-panel,
-  .people-panel {
-    padding: 18px 20px;
-  }
-
-  .panel-title {
-    font-size: 12px;
-    margin-bottom: 14px;
-  }
-
-  .draft-card {
-    padding: 12px 14px;
-  }
-
-  .sensor-name {
-    font-size: 10px;
-  }
-
-  .draft-value {
-    font-size: 24px;
-  }
-
-  .pressure-label {
-    font-size: 10px;
-  }
-
-  .imu-card {
-    padding: 11px 10px;
-  }
-
-  .imu-card .label {
-    font-size: 10px;
-  }
-
-  .imu-card .value {
-    font-size: 15px;
-  }
-
-  .stab-card .label {
-    font-size: 10px;
-  }
-
-  .stab-card .value {
-    font-size: 22px;
-  }
-}
-
-/* =========================================================
-   CELULAR
-   Prioridade: leitura, toque e aproveitamento da largura.
-   ========================================================= */
-@media (max-width: 600px) {
-  html,
-  body {
-    width: 100%;
-    min-width: 0;
-    overflow-x: hidden;
-    font-size: 15px;
-  }
-
-  .dashboard {
-    width: 100%;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-
-  /* Cabecalho em duas linhas para evitar texto/botao cortado */
-  .header {
-    width: 100%;
-    min-width: 0;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 9px 10px;
-    padding: 12px 14px;
-  }
-
-  .header-brand {
-    flex: 1 1 auto;
-    min-width: 0;
-  }
-
-  .header-logo {
-    width: 34px;
-    height: 34px;
-  }
-
-  .header-title {
-    font-size: 19px;
-    line-height: 1.1;
-  }
-
-  .header-subtitle {
-    max-width: none;
-    font-size: 9.5px;
-    line-height: 1.25;
-  }
-
-  .header-status {
-    flex: 1 1 100%;
-    min-width: 0;
-    justify-content: space-between;
-    gap: 8px;
-    font-size: 10px;
-    white-space: normal;
-  }
-
-  /* O botao criado pelo JS continua funcionando, apenas fica maior para toque */
-  .header-status button {
-    flex-shrink: 0;
-    margin-left: auto !important;
-    padding: 7px 11px !important;
-    font-size: 10px !important;
-    min-height: 32px;
-  }
-
-  .mid-grid,
-  .bottom-grid {
-    display: block;
-    width: 100%;
-  }
-
-  .panel,
-  .cam-panel,
-  .people-panel {
-    width: 100%;
-    padding: 16px 14px;
-    border-right: none;
-  }
-
-  .panel-title {
-    font-size: 12px;
-    letter-spacing: 0.7px;
-    line-height: 1.25;
-    margin-bottom: 13px;
-  }
-
-  .panel-title i {
-    font-size: 14px;
-  }
-
-  /* Em vez de ocupar quase a tela inteira, a embarcacao ganha uma altura controlada */
-  .vessel-svg {
-    display: block;
-    width: 100%;
-    max-width: 100%;
-    height: clamp(230px, 58vw, 320px);
-    object-fit: contain;
-    object-position: center;
-  }
-
-  /* Dados de estabilidade com tamanho confortavel */
-  .stability-cards {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 9px;
-    margin-top: 12px;
-  }
-
-  .stab-card {
-    min-width: 0;
-    padding: 11px 10px;
-  }
-
-  .stab-card .label {
-    font-size: 9px;
-    letter-spacing: 0.8px;
-    margin-bottom: 5px;
-  }
-
-  .stab-card .value {
-    font-size: 21px;
-  }
-
-  .status-ok {
-    font-size: 9px;
-  }
-
-  /* Sensores hidrostáticos: duas colunas, valores grandes */
-  .draft-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
-    margin-bottom: 18px;
-  }
-
-  .draft-card {
-    min-width: 0;
-    padding: 12px 11px;
-  }
-
-  .draft-card .row {
+  .stability-metrics {
     gap: 6px;
   }
 
-  .sensor-name {
-    font-size: 9px;
-    letter-spacing: 0.7px;
+  .metric-card {
+    padding: 8px 6px;
+    text-align: center;
   }
 
-  .badge-ok {
+  .metric-card span {
     font-size: 8px;
-    padding: 2px 5px;
   }
 
-  .draft-value {
-    font-size: 23px;
-    line-height: 1.15;
-    margin-bottom: 9px;
+  .metric-card strong {
+    font-size: 16px;
   }
 
-  .draft-value span {
-    font-size: 12px;
+  .metric-card small {
+    font-size: 7px;
+    letter-spacing: 0.4px;
   }
 
-  .bar-track {
-    height: 5px;
-    margin-bottom: 7px;
-  }
-
-  .pressure-label {
-    font-size: 9.5px;
-    white-space: normal;
-    line-height: 1.3;
-  }
-
-  /* IMU: duas colunas deixam X/Y/Z realmente legiveis */
-  .imu-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 9px;
-  }
-
-  .imu-card {
-    min-width: 0;
-    padding: 11px 9px;
-    min-height: 58px;
-  }
-
-  .imu-card .label {
-    font-size: 9px;
-    letter-spacing: 0.6px;
-    margin-bottom: 5px;
-  }
-
-  .imu-card .value {
-    font-size: 14px;
-    white-space: nowrap;
-  }
-
-  /* Temperatura e demais blocos ocupam toda a largura quando necessario */
-  .equip-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 9px;
-  }
-
-  /* Barra inferior sem esmagar as informacoes */
-  .status-bar {
-    width: 100%;
-    padding: 11px 14px;
-    flex-wrap: wrap;
-    gap: 9px 16px;
+  .imu-card strong {
+    font-size: 11px;
   }
 
   .status-items {
-    width: 100%;
-    flex-wrap: wrap;
-    gap: 9px 16px;
+    gap: 9px 14px;
   }
 
-  .status-item,
-  .status-vessel {
-    font-size: 10px;
+  .status-item {
+    font-size: 9px;
   }
 }
 
-/* Celulares estreitos */
-@media (max-width: 420px) {
-  .header {
-    padding: 11px 12px;
-  }
-
-  .header-logo {
-    width: 32px;
-    height: 32px;
-  }
-
-  .header-title {
-    font-size: 18px;
-  }
-
-  .header-subtitle {
-    font-size: 9px;
-  }
-
-  .header-status {
-    font-size: 9.5px;
-  }
-
-  .panel,
-  .cam-panel,
-  .people-panel {
-    padding: 15px 12px;
-  }
-
-  .panel-title {
-    font-size: 11.5px;
-  }
-
-  .vessel-svg {
-    height: clamp(215px, 60vw, 275px);
-  }
-
-  .draft-card {
-    padding: 11px 9px;
-  }
-
-  .draft-value {
-    font-size: 21px;
-  }
-
-  .pressure-label {
-    font-size: 9px;
-  }
-
-  .imu-card {
-    padding: 10px 8px;
-  }
-
-  .imu-card .value {
-    font-size: 13.5px;
-  }
-}
-
-/* Celulares muito estreitos: uma coluna evita qualquer aperto de texto */
 @media (max-width: 360px) {
-  .header-title {
-    font-size: 17px;
-  }
-
   .header-subtitle {
-    font-size: 8.5px;
+    max-width: 145px;
+    line-height: 1.15;
   }
 
-  .stability-cards,
-  .draft-grid {
+  .stability-metrics {
     grid-template-columns: 1fr;
   }
 
-  .draft-value {
-    font-size: 23px;
+  .metric-card {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 3px 8px;
+    text-align: left;
   }
 
-  .imu-grid {
-    grid-template-columns: 1fr 1fr;
+  .metric-card span {
+    grid-column: 1;
   }
 
-  .imu-card .value {
-    font-size: 14px;
+  .metric-card strong {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
+
+  .metric-card small {
+    grid-column: 1;
+  }
+
+  .draft-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
   }
 }
