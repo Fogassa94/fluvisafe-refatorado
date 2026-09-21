@@ -575,19 +575,25 @@ body {
 
 /* =========================================================
    RESPONSIVIDADE - AJUSTES EXCLUSIVOS DE INTERFACE
-   Mantem a estrutura, dados, estilos e funcionalidades
-   existentes. Apenas adapta a disposicao para telas menores.
+   Apenas adapta tamanho, espacamento e disposicao para diferentes telas.
+   Nenhuma funcionalidade ou regra de dados foi alterada.
    ========================================================= */
 
-/* Tablets e telas menores */
-@media (max-width: 900px) {
+/* Monitores menores, notebooks e tablets em paisagem */
+@media (max-width: 1100px) {
   .dashboard {
     width: 100%;
-    max-width: 100%;
+    max-width: 1440px;
   }
 
   .header {
-    padding: 12px 16px;
+    padding: 12px 18px;
+  }
+
+  .panel,
+  .cam-panel,
+  .people-panel {
+    padding: 15px 16px;
   }
 
   .mid-grid,
@@ -602,19 +608,63 @@ body {
   }
 
   .status-bar {
-    gap: 12px;
     flex-wrap: wrap;
+    gap: 10px 18px;
   }
 }
 
-/* Celulares */
-@media (max-width: 600px) {
+/* Tablets e celulares em paisagem */
+@media (max-width: 900px) {
   html,
   body {
     width: 100%;
     min-width: 0;
     overflow-x: hidden;
-    font-size: 12px;
+  }
+
+  .header {
+    padding: 13px 16px;
+  }
+
+  .header-title {
+    font-size: 18px;
+  }
+
+  .header-subtitle {
+    font-size: 10px;
+  }
+
+  .header-status {
+    font-size: 11px;
+  }
+
+  .panel,
+  .cam-panel,
+  .people-panel {
+    padding: 16px;
+  }
+
+  .panel-title {
+    font-size: 10px;
+    margin-bottom: 12px;
+  }
+
+  .draft-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .imu-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Celulares: interface mais legivel e aproveitamento total da tela */
+@media (max-width: 600px) {
+  html,
+  body {
+    font-size: 14px;
+    min-width: 0;
+    overflow-x: hidden;
   }
 
   .dashboard {
@@ -626,39 +676,40 @@ body {
 
   .header {
     width: 100%;
-    padding: 10px 12px;
-    gap: 10px;
+    padding: 13px 14px;
+    gap: 12px;
   }
 
   .header-brand {
     min-width: 0;
-    gap: 8px;
+    gap: 9px;
   }
 
   .header-logo {
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
   }
 
   .header-title {
-    font-size: 16px;
+    font-size: 17px;
   }
 
   .header-subtitle {
-    max-width: 190px;
+    max-width: 210px;
     font-size: 9px;
-    line-height: 1.25;
+    line-height: 1.3;
   }
 
   .header-status {
     flex-shrink: 0;
     gap: 5px;
     font-size: 9px;
+    white-space: nowrap;
   }
 
   .live-dot {
-    width: 6px;
-    height: 6px;
+    width: 7px;
+    height: 7px;
   }
 
   .mid-grid,
@@ -671,101 +722,109 @@ body {
   .cam-panel,
   .people-panel {
     width: 100%;
-    padding: 12px;
+    padding: 14px;
     border-right: none;
   }
 
   .panel-title {
-    font-size: 9px;
-    letter-spacing: 0.65px;
-    margin-bottom: 10px;
+    font-size: 10px;
+    letter-spacing: 0.7px;
+    margin-bottom: 12px;
   }
 
   .panel-title i {
-    font-size: 12px;
+    font-size: 13px;
   }
 
   .vessel-svg {
+    display: block;
     width: 100%;
     max-width: 100%;
     height: auto;
   }
 
+  /* Cards de estabilidade continuam lado a lado, mas ganham espaco */
   .stability-cards {
-    gap: 6px;
-    margin-top: 8px;
+    gap: 8px;
+    margin-top: 10px;
   }
 
   .stab-card {
     min-width: 0;
-    padding: 8px 6px;
+    padding: 10px 8px;
   }
 
   .stab-card .label {
-    font-size: 7px;
-    letter-spacing: 0.7px;
+    font-size: 8px;
+    letter-spacing: 0.8px;
   }
 
   .stab-card .value {
-    font-size: 17px;
+    font-size: 19px;
   }
 
   .status-ok {
-    font-size: 7px;
+    font-size: 8px;
   }
 
+  /* Sensores: duas colunas em celular normal */
   .draft-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 7px;
-    margin-bottom: 12px;
+    gap: 9px;
+    margin-bottom: 14px;
   }
 
   .draft-card {
     min-width: 0;
-    padding: 8px 9px;
+    padding: 10px 11px;
   }
 
   .sensor-name {
-    font-size: 7px;
-    letter-spacing: 0.7px;
+    font-size: 8px;
+    letter-spacing: 0.8px;
   }
 
   .badge-ok {
-    font-size: 7px;
-    padding: 1px 4px;
+    font-size: 8px;
+    padding: 2px 5px;
   }
 
   .draft-value {
-    font-size: 18px;
-    margin-bottom: 6px;
+    font-size: 21px;
+    margin-bottom: 8px;
   }
 
   .draft-value span {
-    font-size: 10px;
+    font-size: 11px;
   }
 
   .pressure-label {
-    font-size: 8px;
+    font-size: 9px;
     white-space: nowrap;
   }
 
+  .bar-track {
+    height: 5px;
+  }
+
+  /* IMU: duas colunas para deixar os valores legiveis */
   .imu-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 6px;
+    gap: 8px;
   }
 
   .imu-card {
     min-width: 0;
-    padding: 7px 6px;
+    padding: 9px 8px;
   }
 
   .imu-card .label {
-    font-size: 7px;
-    letter-spacing: 0.55px;
+    font-size: 8px;
+    letter-spacing: 0.6px;
   }
 
   .imu-card .value {
-    font-size: 11px;
+    font-size: 12px;
     white-space: nowrap;
   }
 
@@ -774,25 +833,27 @@ body {
   }
 
   .people-panel {
-    gap: 8px;
+    gap: 10px;
   }
 
+  /* Rodape vira blocos legiveis, sem comprimir horizontalmente */
   .status-bar {
     width: 100%;
-    padding: 8px 12px;
-    gap: 8px;
+    padding: 10px 14px;
+    gap: 9px;
     align-items: flex-start;
+    flex-direction: column;
   }
 
   .status-items {
     width: 100%;
     flex-wrap: wrap;
-    gap: 6px 12px;
+    gap: 7px 14px;
   }
 
   .status-item,
   .status-vessel {
-    font-size: 8px;
+    font-size: 9px;
   }
 
   .status-vessel {
@@ -801,7 +862,7 @@ body {
 }
 
 /* Celulares estreitos */
-@media (max-width: 380px) {
+@media (max-width: 420px) {
   .header {
     align-items: flex-start;
   }
@@ -811,7 +872,7 @@ body {
   }
 
   .header-subtitle {
-    max-width: 145px;
+    max-width: 165px;
   }
 
   .header-status {
@@ -824,26 +885,319 @@ body {
   .panel,
   .cam-panel,
   .people-panel {
-    padding: 10px;
+    padding: 12px;
   }
 
-  .draft-grid {
-    gap: 6px;
+  .draft-grid,
+  .imu-grid {
+    gap: 7px;
   }
 
   .draft-card {
-    padding: 7px;
+    padding: 9px;
   }
 
   .draft-value {
-    font-size: 16px;
+    font-size: 19px;
   }
 
   .pressure-label {
-    font-size: 7px;
+    font-size: 8px;
+  }
+
+  .imu-card {
+    padding: 8px 6px;
   }
 
   .imu-card .value {
+    font-size: 11px;
+  }
+}
+
+/* Celulares muito estreitos: uma coluna evita texto espremido */
+@media (max-width: 360px) {
+  .header-title {
+    font-size: 16px;
+  }
+
+  .header-subtitle {
+    max-width: 145px;
+    font-size: 8px;
+  }
+
+  .draft-grid,
+  .imu-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .draft-value {
+    font-size: 21px;
+  }
+
+  .imu-card .value {
+    font-size: 12px;
+  }
+}
+
+/* =========================================================
+   RESPONSIVIDADE - LEGIBILIDADE EM TELAS MENORES
+   Ajusta apenas escala visual, espacamento e distribuicao.
+   Nao altera HTML, JavaScript ou funcionalidades.
+   ========================================================= */
+
+/* Tablets, monitores menores e notebooks compactos */
+@media (min-width: 601px) and (max-width: 1200px) {
+  html,
+  body {
+    font-size: 14px;
+  }
+
+  .header {
+    padding: 14px 20px;
+  }
+
+  .header-title {
+    font-size: 20px;
+  }
+
+  .header-subtitle {
+    font-size: 11px;
+  }
+
+  .header-status {
+    font-size: 12px;
+  }
+
+  .panel,
+  .cam-panel,
+  .people-panel {
+    padding: 18px 20px;
+  }
+
+  .panel-title {
+    font-size: 12px;
+    margin-bottom: 15px;
+  }
+
+  .draft-card {
+    padding: 12px 14px;
+  }
+
+  .sensor-name {
     font-size: 10px;
+  }
+
+  .draft-value {
+    font-size: 25px;
+  }
+
+  .pressure-label {
+    font-size: 10px;
+  }
+
+  .imu-card {
+    padding: 11px 10px;
+  }
+
+  .imu-card .label {
+    font-size: 10px;
+  }
+
+  .imu-card .value {
+    font-size: 14px;
+  }
+
+  .status-item,
+  .status-vessel {
+    font-size: 10px;
+  }
+}
+
+/* Celulares: prioridade para leitura */
+@media (max-width: 600px) {
+  html,
+  body {
+    font-size: 15px;
+  }
+
+  .header {
+    padding: 15px 15px;
+    gap: 12px;
+  }
+
+  .header-logo {
+    width: 34px;
+    height: 34px;
+  }
+
+  .header-title {
+    font-size: 19px;
+  }
+
+  .header-subtitle {
+    max-width: 220px;
+    font-size: 10px;
+    line-height: 1.35;
+  }
+
+  .header-status {
+    font-size: 10px;
+  }
+
+  .panel,
+  .cam-panel,
+  .people-panel {
+    padding: 16px 15px;
+  }
+
+  .panel-title {
+    font-size: 11px;
+    letter-spacing: 0.65px;
+    margin-bottom: 14px;
+  }
+
+  .panel-title i {
+    font-size: 15px;
+  }
+
+  .draft-grid {
+    gap: 10px;
+  }
+
+  .draft-card {
+    padding: 12px 12px;
+    border-radius: var(--radius-md);
+  }
+
+  .sensor-name {
+    font-size: 9px;
+  }
+
+  .badge-ok {
+    font-size: 9px;
+    padding: 2px 6px;
+  }
+
+  .draft-value {
+    font-size: 24px;
+    line-height: 1.15;
+  }
+
+  .draft-value span {
+    font-size: 12px;
+  }
+
+  .pressure-label {
+    font-size: 9.5px;
+  }
+
+  .bar-track {
+    height: 5px;
+  }
+
+  .imu-grid {
+    gap: 9px;
+  }
+
+  .imu-card {
+    padding: 11px 9px;
+  }
+
+  .imu-card .label {
+    font-size: 9px;
+    margin-bottom: 5px;
+  }
+
+  .imu-card .value {
+    font-size: 14px;
+  }
+
+  .status-bar {
+    padding: 12px 15px;
+  }
+
+  .status-item,
+  .status-vessel {
+    font-size: 10px;
+  }
+}
+
+/* Celulares estreitos: mantem leitura sem reduzir as fontes demais */
+@media (max-width: 420px) {
+  .header-title {
+    font-size: 18px;
+  }
+
+  .header-subtitle {
+    max-width: 180px;
+    font-size: 9px;
+  }
+
+  .header-status {
+    font-size: 9px;
+  }
+
+  .panel,
+  .cam-panel,
+  .people-panel {
+    padding: 15px 12px;
+  }
+
+  .panel-title {
+    font-size: 10.5px;
+  }
+
+  .draft-card {
+    padding: 11px 10px;
+  }
+
+  .draft-value {
+    font-size: 22px;
+  }
+
+  .pressure-label {
+    font-size: 9px;
+  }
+
+  .imu-card {
+    padding: 10px 8px;
+  }
+
+  .imu-card .value {
+    font-size: 13px;
+  }
+
+  .status-item,
+  .status-vessel {
+    font-size: 9px;
+  }
+}
+
+/* Celulares muito estreitos: uma coluna continua sendo a opcao mais legivel */
+@media (max-width: 360px) {
+  .header-title {
+    font-size: 17px;
+  }
+
+  .header-subtitle {
+    max-width: 160px;
+    font-size: 8.5px;
+  }
+
+  .header-status {
+    font-size: 8.5px;
+  }
+
+  .draft-grid,
+  .imu-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .draft-value {
+    font-size: 23px;
+  }
+
+  .imu-card .value {
+    font-size: 14px;
   }
 }
